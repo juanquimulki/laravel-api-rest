@@ -2,23 +2,12 @@
 
 namespace App\DataTransferObjects;
 
-use App\DataTransferObjects\GifSingleData;
-use App\DataTransferObjects\MetaData;
-
-class ResponseSingleData {
-
-    private GifSingleData $data;
-    private MetaData      $meta;
+class ResponseSingleData extends ResponseData {
 
     public function __construct($response) {
-        $this->data = new GifSingleData($response->data);
-        $this->meta = new MetaData($response->meta);
-    }
+        parent::__construct($response);
 
-    public function toArray() {
-        return [
-            "data" => $this->data->toArray(),
-            "meta" => $this->meta->toArray(),
-        ];
+        $this->data       = new GifSingleData($response->data);
+        $this->pagination = null;
     }
 }
