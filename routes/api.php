@@ -22,4 +22,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/getById',    [GifController::class, 'getById']);
 Route::get('/getByQuery', [GifController::class, 'getByQuery']);
 Route::get('/save',       [GifController::class, 'save']);
-Route::get('/test',       [GifController::class, 'test']);

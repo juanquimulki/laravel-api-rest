@@ -12,10 +12,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $giphyUrl = env('GIPHY_URL');
+        $giphyUrl    = env('GIPHY_URL');
+        $giphyApiKey = env('GIPHY_APIKEY');
 
-        $this->app->singleton(Client::class, function($app) use ($giphyUrl) {
-            return new Client(['base_uri' => $giphyUrl]);
+        $this->app->singleton(Client::class, function($app) use ($giphyUrl, $giphyApiKey) {
+            return new Client(['base_uri' => $giphyUrl,     
+                'defaults' => [
+                    'query'  => [
+                        'api_key' => $giphyApiKey,
+                    ]
+                ]
+            ]);
         });
     }
 

@@ -15,17 +15,36 @@ class GifController extends Controller
     }
 
     public function getById(Request $request) {
-        return response()->json([
-            'status' => 'OK',
-            'id'     => $request->id,
+        $request->validate([
+            'id' => 'required|string', // El 'id' es alfanumérico
         ]);
+
+        $params = [];
+        $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
+
+        $response = $this->httpClient->request('GET', $request->id, $params);
+        return response()->json(json_decode($response->getBody()));
     }
 
     public function getByQuery(Request $request) {
-        return response()->json([
-            'status' => 'OK',
-            'query'  => $request->search,
+        $request->validate([
+            'q'      => 'required|string',
+            'limit'  => 'integer',
+            'offset' => 'integer'
         ]);
+
+        $params = [
+            'query' => [
+                'q'      => $request->q,
+                'limit'  => $request->limit,
+                'offset' => $request->offset,
+
+            ]
+        ];
+        $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
+
+        $response = $this->httpClient->request('GET', 'search', $params);
+        return response()->json(json_decode($response->getBody()));
     }
 
     public function save(Request $request) {
@@ -33,17 +52,5 @@ class GifController extends Controller
             'status' => 'OK',
             'alias'  => $request->alias,
         ]);
-    }
-
-    public function test() {
-        $params = [
-            'query' => [
-               'api_key'  => "vPiFbtTGOAhO4qcdxepDpZVC0D2nEp23",
-            ]
-        ];
-
-        $response = $this->httpClient->request('GET', "g5R9dok94mrIvplmZd", $params);
-        $data = json_decode($response->getBody());
-        dd($data);
     }
 }
