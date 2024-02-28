@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\DataTransferObjects\GifSingleData;
-use App\DataTransferObjects\GifListData;
-use App\DataTransferObjects\MetaData;
-use App\DataTransferObjects\PaginationData;
+use App\DataTransferObjects\ResponseSingleData;
+use App\DataTransferObjects\ResponseListData;
 
 class GifController extends Controller
 {
@@ -29,13 +27,7 @@ class GifController extends Controller
         $response = $this->httpClient->request('GET', $request->id, $params);
         $body     = json_decode($response->getBody());
 
-        $gif  = new GifSingleData($body->data);
-        $meta = new MetaData($body->meta);
-
-        return response()->json([
-            "data" => $gif->toArray(),
-            "meta" => $meta->toArray(),
-        ]);
+        return response()->json((new ResponseSingleData($body))->toArray());
     }
 
     public function getByQuery(Request $request) {
@@ -58,15 +50,7 @@ class GifController extends Controller
         $response = $this->httpClient->request('GET', 'search', $params);
         $body     = json_decode($response->getBody());
 
-        $gifs       = new GifListData($body->data);
-        $pagination = new PaginationData($body->pagination);
-        $meta       = new MetaData($body->meta);
-
-        return response()->json([
-            "data"       => $gifs->toArray(),
-            "meta"       => $meta->toArray(),
-            "pagination" => $pagination->toArray(),
-        ]);
+        return response()->json((new ResponseListData($body))->toArray());
     }
 
     public function save(Request $request) {
