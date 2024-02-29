@@ -6,7 +6,7 @@ class ResponseData {
 
     protected $data;
     private   MetaData $meta;
-    protected PaginationData $pagination;
+    protected ?PaginationData $pagination;
 
     public function __construct($response) {
         $this->meta = new MetaData($response->meta);
