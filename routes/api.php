@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GifController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SavedGifController;
 use App\Models\User;
 
 /*
@@ -24,7 +25,7 @@ use App\Models\User;
 Route::post('user/login', [UserController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('getById',    [GifController::class, 'getById']);
-    Route::get('getByQuery', [GifController::class, 'getByQuery']);
-    Route::get('save',       [GifController::class, 'save']);
+    Route::get('getById',    [GifController::class,       'getById']);
+    Route::get('getByQuery', [GifController::class,       'getByQuery']);
+    Route::post('save',      [SavedGifController::class,  'save']);
 });

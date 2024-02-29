@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Laravel\Passport\Token;
 
 class User extends Authenticatable
 {
@@ -42,4 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function getUserByToken($token) {
+        $token_parts = explode('.', $token);
+        $token_header = $token_parts[1];
+        $token_header_json = base64_decode($token_header);
+        $token_header_array = json_decode($token_header_json, true);
+        $token_id = $token_header_array['jti'];
+
+        return Token::find($token_id)->user;
+    }
 }

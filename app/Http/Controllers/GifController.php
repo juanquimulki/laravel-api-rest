@@ -52,11 +52,4 @@ class GifController extends Controller
 
         return response()->json((new ResponseListData($body))->toArray());
     }
-
-    public function save(Request $request) {
-        return response()->json([
-            'status' => 'OK',
-            'alias'  => $request->alias,
-        ]);
-    }
 }
