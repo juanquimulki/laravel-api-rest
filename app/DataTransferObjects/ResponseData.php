@@ -13,10 +13,15 @@ class ResponseData {
     }
 
     public function toArray() {
-        return [
+        $response = [
             "data"       => $this->data->toArray(),
             "meta"       => $this->meta->toArray(),
-            "pagination" => isset($this->pagination) ? $this->pagination->toArray() : null,
         ];
+
+        if (isset($this->pagination)) {
+            $response["pagination"] = $this->pagination->toArray();
+        }
+
+        return $response;
     }
 }
