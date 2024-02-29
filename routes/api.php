@@ -21,21 +21,10 @@ use App\Models\User;
     return $request->user();
 });*/
 
+Route::post('user/login', [UserController::class, 'login']);
+
 Route::middleware('auth:api')->group(function () {
-    Route::get('/getById',    [GifController::class, 'getById']);
-    Route::get('/getByQuery', [GifController::class, 'getByQuery']);
-    Route::get('/save',       [GifController::class, 'save']);
+    Route::get('getById',    [GifController::class, 'getById']);
+    Route::get('getByQuery', [GifController::class, 'getByQuery']);
+    Route::get('save',       [GifController::class, 'save']);
 });
-
-
-Route::post('/user', function() {
-    $user = new User();
-    $user->name = "Juanqui Mulki";
-    $user->email = "juanqui@hotmail.com";
-    $user->password = "123456789";
-    $user->save();
-
-    return response()->json($user);
-});
-
-Route::get('/token', [UserController::class, 'token']);
