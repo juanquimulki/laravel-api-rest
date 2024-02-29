@@ -6,6 +6,7 @@ use App\Http\Controllers\GifController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SavedGifController;
 use App\Models\User;
+use App\Http\Middleware\SaveLog;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ use App\Models\User;
 Route::post('user/login', [UserController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('getById',    [GifController::class,       'getById']);
-    Route::get('getByQuery', [GifController::class,       'getByQuery']);
-    Route::post('save',      [SavedGifController::class,  'save']);
+    Route::get('getById',    [GifController::class,       'getById'])->middleware(SaveLog::class);
+    Route::get('getByQuery', [GifController::class,       'getByQuery'])->middleware(SaveLog::class);
+    Route::post('save',      [SavedGifController::class,  'save'])->middleware(SaveLog::class);
 });
