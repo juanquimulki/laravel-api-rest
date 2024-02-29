@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\DataTransferObjects\ResponseSingleData;
-use App\DataTransferObjects\ResponseListData;
+use App\DataTransferObjects\GifSingleData;
+use App\DataTransferObjects\GifListData;
+use App\DataTransferObjects\MetaData;
+use App\DataTransferObjects\PaginationData;
 
 class GifController extends Controller
 {
@@ -27,7 +29,10 @@ class GifController extends Controller
         $response = $this->httpClient->request('GET', $request->id, $params);
         $body     = json_decode($response->getBody());
 
-        return response()->json((new ResponseSingleData($body))->toArray());
+        return response()->json([
+            "data"       => (new GifSingleData($body->data))->toArray(),
+            "meta"       => (new MetaData($body->meta))->toArray(),
+        ]);
     }
 
     public function getByQuery(Request $request) {
@@ -50,6 +55,10 @@ class GifController extends Controller
         $response = $this->httpClient->request('GET', 'search', $params);
         $body     = json_decode($response->getBody());
 
-        return response()->json((new ResponseListData($body))->toArray());
+        return response()->json([
+            "data"       => (new GifListData($body->data))->toArray(),
+            "meta"       => (new MetaData($body->meta))->toArray(),
+            "pagination" => (new PaginationData($body->pagination))->toArray(),
+        ]);
     }
 }
