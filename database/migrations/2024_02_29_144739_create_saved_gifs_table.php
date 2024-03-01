@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('saved_gifs', function (Blueprint $table) {
             $table->id();
-            $table->integer('gif_id');
+            $table->string('gif_id');
             $table->string('alias');
             $table->integer('user_id');
             $table->timestamps();
