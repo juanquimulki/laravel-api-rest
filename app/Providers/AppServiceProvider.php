@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
 use App\Services\IUserService;
 use App\Services\UserService;
+use App\Services\IGiphyService;
+use App\Services\GiphyService;
+use App\Services\ISavedGifService;
+use App\Services\SavedGifService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IUserService::class, UserService::class);
+        $this->app->bind(IUserService::class,     UserService::class);
+        $this->app->bind(IGiphyService::class,    GiphyService::class);
+        $this->app->bind(ISavedGifService::class, SavedGifService::class);
 
         $giphyUrl    = env('GIPHY_URL');
         $giphyApiKey = env('GIPHY_APIKEY');

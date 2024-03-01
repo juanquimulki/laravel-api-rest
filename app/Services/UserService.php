@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Services\IUserService;
 use App\Repositories\UserRepository;
+use App\Models\User;
 
 class UserService implements IUserService {
 
@@ -16,5 +18,10 @@ class UserService implements IUserService {
     public function getByEmail(string $email)
     {
         return $this->userRepository->getFirstByEmail($email);
+    }
+
+    public function getByToken(string $token)
+    {
+        return User::getByToken($token);
     }
 }

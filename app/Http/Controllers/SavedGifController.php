@@ -3,27 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\SavedGif;
+use App\Services\IUserService;
+use App\Services\ISavedGifService;
+use App\DataTransferObjects\SavedGifData;
 use App\Classes\StatusCodes;
 
 class SavedGifController extends Controller
 {
+
+    private IUserService     $userService;
+    private ISavedGifService $savedGifService;
+
+    public function __construct(IUserService $userService, ISavedGifService $savedGifService)
+    {
+        $this->userService     = $userService;
+        $this->savedGifService = $savedGifService;
+    }
+
     public function save(Request $request) {
         $request->validate([
             "gif_id" => "required|string|min:1|max:255",
             "alias"  => "required|string|min:1|max:255",
         ]);
 
-        $user = User::getUserByToken($request->bearerToken());        
+        $user = $this->userService->getByToken($request->bearerToken());        
 
-        $savedGif = new SavedGif();
-
-        $savedGif->gif_id  = $request->gif_id;
-        $savedGif->alias   = $request->alias;
-        $savedGif->user_id = $user->id;
-
-        $savedGif->save();
+        $savedGifData = new SavedGifData($request->gif_id, $request->alias, $user->id);
+        $savedGif = $this->savedGifService->save($savedGifData);
 
         return response()->json($savedGif, StatusCodes::$CREATED);
     }

@@ -60,7 +60,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public static function getUserByToken($token) {
+    public static function getByToken($token) {
         $token_parts = explode('.', $token);
         $token_header = $token_parts[1];
         $token_header_json = base64_decode($token_header);

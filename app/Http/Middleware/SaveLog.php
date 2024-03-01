@@ -21,7 +21,7 @@ class SaveLog
         $response = $next($request);
  
         ServiceRequested::dispatch(
-            User::getUserByToken($request->bearerToken())->id,
+            User::getByToken($request->bearerToken())->id,
             $request->path(),
             $request->getContent(),
             $response->status(),

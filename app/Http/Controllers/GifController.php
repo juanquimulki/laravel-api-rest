@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use App\Services\IGiphyService;
+use App\DataTransferObjects\GiphyData;
 use App\DataTransferObjects\GifSingleData;
 use App\DataTransferObjects\GifListData;
 use App\DataTransferObjects\MetaData;
@@ -11,11 +12,11 @@ use App\DataTransferObjects\PaginationData;
 
 class GifController extends Controller
 {
-    private Client $httpClient;
+    private IGiphyService $giphyService;
 
-    public function __construct(Client $httpClient)
+    public function __construct(IGiphyService $giphyService)
     {
-        $this->httpClient = $httpClient;
+        $this->giphyService = $giphyService;
     }
 
     public function getById(Request $request) {
@@ -23,15 +24,11 @@ class GifController extends Controller
             'id' => 'required|string', // El 'id' es alfanumérico
         ]);
 
-        $params = [];
-        $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
-
-        $response = $this->httpClient->request('GET', $request->id, $params);
-        $body     = json_decode($response->getBody());
+        $response = $this->giphyService->getById($request->id);
 
         return response()->json([
-            "data"       => (new GifSingleData($body->data))->toArray(),
-            "meta"       => (new MetaData($body->meta))->toArray(),
+            "data"       => (new GifSingleData($response->data))->toArray(),
+            "meta"       => (new MetaData($response->meta))->toArray(),
         ]);
     }
 
@@ -42,23 +39,13 @@ class GifController extends Controller
             'offset' => 'integer'
         ]);
 
-        $params = [
-            'query' => [
-                'q'      => $request->q,
-                'limit'  => $request->limit,
-                'offset' => $request->offset,
-
-            ]
-        ];
-        $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
-
-        $response = $this->httpClient->request('GET', 'search', $params);
-        $body     = json_decode($response->getBody());
+        $giphyData = new GiphyData($request->q, $request->limit, $request->offset);
+        $response = $this->giphyService->getByQuery($giphyData);
 
         return response()->json([
-            "data"       => (new GifListData($body->data))->toArray(),
-            "meta"       => (new MetaData($body->meta))->toArray(),
-            "pagination" => (new PaginationData($body->pagination))->toArray(),
+            "data"       => (new GifListData($response->data))->toArray(),
+            "meta"       => (new MetaData($response->meta))->toArray(),
+            "pagination" => (new PaginationData($response->pagination))->toArray(),
         ]);
     }
 }
