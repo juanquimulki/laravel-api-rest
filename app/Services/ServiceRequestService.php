@@ -14,8 +14,8 @@ class ServiceRequestService implements IServiceRequestService {
         $this->serviceRequestRepository = $serviceRequestRepository;
     }
 
-    public function save(ServiceRequestData $data)
+    public function save(ServiceRequestData $data): void
     {
-        return $this->serviceRequestRepository->insert($data);
+        $this->serviceRequestRepository->insert($data);
     }
 }

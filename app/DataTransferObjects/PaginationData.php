@@ -8,13 +8,15 @@ class PaginationData {
     private int $count;
     private int $offset;
 
-    public function __construct($data) {
+    public function __construct($data)
+    {
         $this->total_count = $data->total_count;
         $this->count       = $data->count;
         $this->offset      = $data->offset;
     }
 
-    public function toArray() {
+    public function toArray(): array
+    {
         return [
             "total_count" => $this->total_count,
             "count"       => $this->count,

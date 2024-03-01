@@ -12,8 +12,8 @@ class ServiceRequestData {
     public string $origin;
 
     public function __construct(int $user_id, string $service, string $body, 
-                                int $http_status_code, string $response, string $origin) {
-        
+                                int $http_status_code, string $response, string $origin) 
+    {        
         $this->user_id          = $user_id;
         $this->service          = $service;
         $this->body             = $body;

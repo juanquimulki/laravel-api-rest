@@ -7,7 +7,7 @@ use App\Models\SavedGif;
 
 class SavedGifRepository {
 
-    public function insert(SavedGifData $data)
+    public function insert(SavedGifData $data): SavedGif
     {
         $savedGif = new SavedGif();
 

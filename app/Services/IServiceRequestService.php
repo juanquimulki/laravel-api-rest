@@ -6,5 +6,5 @@ use App\DataTransferObjects\ServiceRequestData;
 
 interface IServiceRequestService
 {
-    public function save(ServiceRequestData $data);
+    public function save(ServiceRequestData $data): void;
 }

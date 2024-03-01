@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Services\IGiphyService;
 use App\DataTransferObjects\GiphyData;
 use App\DataTransferObjects\GifSingleData;
@@ -19,7 +20,8 @@ class GifController extends Controller
         $this->giphyService = $giphyService;
     }
 
-    public function getById(Request $request) {
+    public function getById(Request $request): JsonResponse
+    {
         $request->validate([
             'id' => 'required|string', // El 'id' es alfanumérico
         ]);
@@ -32,7 +34,8 @@ class GifController extends Controller
         ]);
     }
 
-    public function getByQuery(Request $request) {
+    public function getByQuery(Request $request): JsonResponse
+    {
         $request->validate([
             'q'      => 'required|string',
             'limit'  => 'integer',

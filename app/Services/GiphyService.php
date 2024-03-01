@@ -14,7 +14,7 @@ class GiphyService implements IGiphyService {
         $this->httpClient = $httpClient;
     }
 
-    public function getById(string $id)
+    public function getById(string $id): mixed
     {
         $params = [];
         $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
@@ -25,7 +25,7 @@ class GiphyService implements IGiphyService {
         return $body;
     }
 
-    public function getByQuery(GiphyData $data)
+    public function getByQuery(GiphyData $data): mixed
     {
         $params = [
             'query' => [

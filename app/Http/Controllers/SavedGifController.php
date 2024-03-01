@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Services\IUserService;
 use App\Services\ISavedGifService;
 use App\DataTransferObjects\SavedGifData;
@@ -20,7 +21,8 @@ class SavedGifController extends Controller
         $this->savedGifService = $savedGifService;
     }
 
-    public function save(Request $request) {
+    public function save(Request $request): JsonResponse
+    {
         $request->validate([
             "gif_id" => "required|string|min:1|max:255",
             "alias"  => "required|string|min:1|max:255",

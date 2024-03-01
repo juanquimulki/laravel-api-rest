@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Services\IUserService;
 
 class UserController extends Controller
@@ -15,7 +16,8 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function login(Request $request) {
+    public function login(Request $request): JsonResponse
+    {
         $request->validate([
             'email'    => 'required|email|exists:users,email',
             'password' => 'required|string|min:8|max:255',

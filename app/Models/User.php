@@ -47,7 +47,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function login(string $password) {
+    public function login(string $password): LoginData
+    {
         if (Hash::check($password, $this->password)) {
             $token      = $this->createToken('My Token')->accessToken;
             $statusCode = StatusCodes::$OK;            
@@ -60,7 +61,8 @@ class User extends Authenticatable
         return $result;
     }
 
-    public static function getByToken($token) {
+    public static function getByToken($token): User
+    {
         $token_parts = explode('.', $token);
         $token_header = $token_parts[1];
         $token_header_json = base64_decode($token_header);

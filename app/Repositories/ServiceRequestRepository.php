@@ -7,7 +7,7 @@ use App\Models\ServiceRequest;
 
 class ServiceRequestRepository {
 
-    public function insert(ServiceRequestData $data)
+    public function insert(ServiceRequestData $data): void
     {
         $sR = new ServiceRequest();
 

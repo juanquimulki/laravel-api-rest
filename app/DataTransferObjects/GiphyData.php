@@ -8,7 +8,8 @@ class GiphyData {
     public ?int   $limit;
     public ?int   $offset;
 
-    public function __construct(string $query, ?int $limit = null, ?int $offset = null) {
+    public function __construct(string $query, ?int $limit = null, ?int $offset = null)
+    {
         $this->query  = $query;
         $this->limit  = $limit;
         $this->offset = $offset;

@@ -10,7 +10,8 @@ class GifSingleData {
     private string $source;
     private string $title;
 
-    public function __construct($data) {
+    public function __construct($data)
+    {
         $this->id       = $data->id;
         $this->url      = $data->url;
         $this->username = $data->username;
@@ -18,7 +19,8 @@ class GifSingleData {
         $this->title    = $data->title;
     }
 
-    public function toArray() {
+    public function toArray(): array
+    {
         return [
             "id"        => $this->id,
             "url"       => $this->url,

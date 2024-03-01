@@ -6,6 +6,6 @@ use App\DataTransferObjects\GiphyData;
 
 interface IGiphyService
 {
-    public function getById(string $id);
-    public function getByQuery(GiphyData $data);
+    public function getById(string $id): mixed;
+    public function getByQuery(GiphyData $data): mixed;
 }

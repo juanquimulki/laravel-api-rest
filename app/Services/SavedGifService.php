@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DataTransferObjects\SavedGifData;
 use App\Repositories\SavedGifRepository;
+use App\Models\SavedGif;
 
 class SavedGifService implements ISavedGifService {
 
@@ -14,7 +15,7 @@ class SavedGifService implements ISavedGifService {
         $this->savedGifRepository = $savedGifRepository;
     }
 
-    public function save(SavedGifData $data)
+    public function save(SavedGifData $data): SavedGif
     {
         return $this->savedGifRepository->insert($data);
     }
