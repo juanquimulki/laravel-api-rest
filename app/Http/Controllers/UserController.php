@@ -3,35 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use App\Classes\StatusCodes;
+use App\Services\IUserService;
 
 class UserController extends Controller
 {
+
+    private IUserService $userService;
+
+    public function __construct(IUserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function login(Request $request) {
         $request->validate([
             'email'    => 'required|email|exists:users,email',
             'password' => 'required|string|min:8|max:255',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = $this->userService->getByEmail($request->email);
+        $loginData = $user->login($request->password);
 
-        $token = null;
-        if (Hash::check($request->password, $user->password)) {
-            $token      = $user->createToken('My Token')->accessToken;
-            $statusCode = StatusCodes::$OK;            
-        } else {
-            $statusCode = StatusCodes::$UNAUTHORIZED;
-        }
-
-        return response()->json(["token" => $token], $statusCode);
-    }
-
-    public function token(Request $request) {
-        $user = User::where('email', 'juanqui@hotmail.com')->first();
-        $token = $user->createToken('My Token')->accessToken;
-        $response = ['token' => $token];
-        return response()->json($response);
+        return response()->json(["token" => $loginData->token], $loginData->statusCode);
     }
 }

@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Passport\Token;
+use App\Classes\StatusCodes;
+use Illuminate\Support\Facades\Hash;
+use App\DataTransferObjects\LoginData;
 
 class User extends Authenticatable
 {
@@ -43,6 +46,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function login(string $password) {
+        if (Hash::check($password, $this->password)) {
+            $token      = $this->createToken('My Token')->accessToken;
+            $statusCode = StatusCodes::$OK;            
+        } else {
+            $statusCode = StatusCodes::$UNAUTHORIZED;
+            $token      = null;
+        }
+
+        $result = new LoginData($token, $statusCode);
+        return $result;
+    }
 
     public static function getUserByToken($token) {
         $token_parts = explode('.', $token);

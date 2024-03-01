@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
+use App\Services\IUserService;
+use App\Services\UserService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(IUserService::class, UserService::class);
+
         $giphyUrl    = env('GIPHY_URL');
         $giphyApiKey = env('GIPHY_APIKEY');
 
