@@ -25,12 +25,12 @@ class SaveRequest
     {
         $sR = new ServiceRequest();
 
-        $sR->user_id          = $event->user_id;
-        $sR->service          = $event->service;
-        $sR->body             = $event->body;
-        $sR->http_status_code = $event->http_status_code;
-        $sR->response         = $event->response;
-        $sR->origin           = $event->origin;
+        $sR->user_id          = $event->data->user_id;
+        $sR->service          = $event->data->service;
+        $sR->body             = $event->data->body;
+        $sR->http_status_code = $event->data->http_status_code;
+        $sR->response         = $event->data->response;
+        $sR->origin           = $event->data->origin;
 
         $sR->save();
     }

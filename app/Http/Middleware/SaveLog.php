@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Events\ServiceRequested;
 use App\Models\User;
+use App\DataTransferObjects\ServiceRequestedData;
 
 class SaveLog
 {
@@ -20,7 +21,7 @@ class SaveLog
     {
         $response = $next($request);
  
-        ServiceRequested::dispatch(
+        $data = new ServiceRequestedData(
             User::getByToken($request->bearerToken())->id,
             $request->path(),
             $request->getContent(),
@@ -28,6 +29,8 @@ class SaveLog
             json_encode($response->getData()),
             $request->ip(),
         );
+
+        ServiceRequested::dispatch($data);
  
         return $response;
     }

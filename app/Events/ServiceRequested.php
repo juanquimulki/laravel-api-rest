@@ -10,29 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+use App\DataTransferObjects\ServiceRequestedData;
+
 class ServiceRequested
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public int    $user_id;
-    public string $service;
-    public string $body;
-    public int    $http_status_code;
-    public string $response;
-    public string $origin;
+    public ServiceRequestedData $data;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(int $user_id, string $service, string $body, 
-        int $http_status_code, string $response, string $origin)
+    public function __construct(ServiceRequestedData $serviceRequestedData)
     {
-        $this->user_id          = $user_id;
-        $this->service          = $service;
-        $this->body             = $body;
-        $this->http_status_code = $http_status_code;
-        $this->response         = $response;
-        $this->origin           = $origin;
+        $this->data = $serviceRequestedData;
     }
 
     /**
