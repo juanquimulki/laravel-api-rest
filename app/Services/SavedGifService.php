@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\DataTransferObjects\SavedGifData;
-use App\Models\SavedGif;
 use App\Repositories\SavedGifRepository;
 
 class SavedGifService implements ISavedGifService {

@@ -6,9 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use App\Events\ServiceRequested;
 use App\Models\User;
-use App\DataTransferObjects\ServiceRequestedData;
+use App\Events\ServiceRequested;
+use App\DataTransferObjects\ServiceRequestData;
 
 class SaveLog
 {
@@ -21,7 +21,7 @@ class SaveLog
     {
         $response = $next($request);
  
-        $data = new ServiceRequestedData(
+        $data = new ServiceRequestData(
             User::getByToken($request->bearerToken())->id,
             $request->path(),
             $request->getContent(),

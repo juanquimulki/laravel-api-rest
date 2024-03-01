@@ -10,6 +10,8 @@ use App\Services\IGiphyService;
 use App\Services\GiphyService;
 use App\Services\ISavedGifService;
 use App\Services\SavedGifService;
+use App\Services\IServiceRequestService;
+use App\Services\ServiceRequestService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,9 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IUserService::class,     UserService::class);
-        $this->app->bind(IGiphyService::class,    GiphyService::class);
-        $this->app->bind(ISavedGifService::class, SavedGifService::class);
+        $this->app->bind(IUserService::class,           UserService::class);
+        $this->app->bind(IGiphyService::class,          GiphyService::class);
+        $this->app->bind(ISavedGifService::class,       SavedGifService::class);
+        $this->app->bind(IServiceRequestService::class, ServiceRequestService::class);
 
         $giphyUrl    = env('GIPHY_URL');
         $giphyApiKey = env('GIPHY_APIKEY');

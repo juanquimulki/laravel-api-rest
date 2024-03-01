@@ -10,20 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-use App\DataTransferObjects\ServiceRequestedData;
+use App\DataTransferObjects\ServiceRequestData;
 
 class ServiceRequested
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public ServiceRequestedData $data;
+    public ServiceRequestData $data;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(ServiceRequestedData $serviceRequestedData)
+    public function __construct(ServiceRequestData $serviceRequestData)
     {
-        $this->data = $serviceRequestedData;
+        $this->data = $serviceRequestData;
     }
 
     /**

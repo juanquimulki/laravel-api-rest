@@ -2,7 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-class ServiceRequestedData {
+class ServiceRequestData {
 
     public int    $user_id;
     public string $service;

@@ -6,16 +6,19 @@ use App\Events\ServiceRequested;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-use App\Models\ServiceRequest;
+use App\Services\IServiceRequestService;
 
 class SaveRequest
 {
+
+    private IServiceRequestService $serviceRequestService;
+
     /**
      * Create the event listener.
      */
-    public function __construct()
+    public function __construct(IServiceRequestService $serviceRequestService)
     {
-        //
+        $this->serviceRequestService = $serviceRequestService;
     }
 
     /**
@@ -23,15 +26,6 @@ class SaveRequest
      */
     public function handle(ServiceRequested $event): void
     {
-        $sR = new ServiceRequest();
-
-        $sR->user_id          = $event->data->user_id;
-        $sR->service          = $event->data->service;
-        $sR->body             = $event->data->body;
-        $sR->http_status_code = $event->data->http_status_code;
-        $sR->response         = $event->data->response;
-        $sR->origin           = $event->data->origin;
-
-        $sR->save();
+        $this->serviceRequestService->save($event->data);
     }
 }
