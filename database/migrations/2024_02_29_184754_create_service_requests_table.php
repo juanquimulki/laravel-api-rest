@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('service_requests', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->bigInteger('user_id');
             $table->string('service');
             $table->text('body');
             $table->integer('http_status_code');

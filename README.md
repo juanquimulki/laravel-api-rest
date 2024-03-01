@@ -5,11 +5,13 @@ Esta es un API REST escrita en PHP Laravel, que accede a la API de Giphy.com par
 ## Despliegue y ejecución
 
 Esta API se ha dockerizado y se ha generado el respectivo archivo docker en el proyecto mediante 'Sail' para Laravel. Para correrla localmente se necesita:
+1. Tener instalado y funcionando Docker Desktop.
 1. Clonar el repositorio.
-2. Instalar las dependencias Composer: `composer install`
-3. Instalar Docker Desktop.
+2. Ir al directorio del proyecto e instalar las dependencias Composer: `composer install`
 3. _En PC Windows_: Correr WSL (Windows Subsytem for Linux).
-4. Levantar los contenedores con `./vendor/bin/sail up`. _De aquí en adelante, diré sólo 'sail'._
+4. Ir al directorio del proyecto y levantar los contenedores con `./vendor/bin/sail up`. _En WSL el arbol de directorios es igual que en Windows._
+
+_De aquí en adelante, diré sólo 'sail'._
 5. Ejecutar las migraciones de base de datos con `sail artisan migrate`.
 6. Instalar Passport con `sail artisan passport:install`. Esto genera las claves de cliente de Passport para autenticación.
 7. Generar el archivo `.env` y agregar los datos de usuario de GIPHY, con las constantes `GIPHY_URL` y `GIPHY_APIKEY`. Ver el archivo `.env.example`.
@@ -23,7 +25,7 @@ Esta API se ha dockerizado y se ha generado el respectivo archivo docker en el p
 - `/api/getByQuery`: Devuelve una lista de GIFs por palabra clave.
 - `/api/save`: Guarda en base de datos el identificador de un GIF para el usuario que consulta (favoritos).
 
-Puedes acceder e importar al archivo JSON de Postman con la lista de endpoints y requests con datos de ejemplo, en este mismo repositorio, en la ubicación `/_docs/Laravel-API-REST.postman_collection`. El request de 'login' almacena el token del response en una variable y será usado con los otros requests de la colección.
+Puedes acceder e importar un archivo JSON de Postman con la lista de endpoints y requests con datos de ejemplo, en este mismo repositorio, en la ubicación `/_docs/Laravel-API-REST.postman_collection`. El request de 'login' almacena el token del response en una variable y será usado con los otros requests de la colección.
 
 **Nota:** Las migraciones generan un usuario de prueba `Prex User`. `email = prexuser@prex.com.ar` - `password = 12345654321`.
 
