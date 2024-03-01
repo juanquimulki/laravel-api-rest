@@ -9,9 +9,7 @@ Esta API se ha dockerizado y se ha generado el respectivo archivo docker en el p
 1. Clonar el repositorio.
 2. Ir al directorio del proyecto e instalar las dependencias Composer: `composer install`
 3. _En PC Windows_: Correr WSL (Windows Subsytem for Linux).
-4. Ir al directorio del proyecto y levantar los contenedores con `./vendor/bin/sail up`. _En WSL el arbol de directorios es igual que en Windows._
-
-_De aquí en adelante, diré sólo 'sail'._
+4. Ir al directorio del proyecto y levantar los contenedores con `./vendor/bin/sail up`. _De aquí en adelante, diré sólo 'sail'. En WSL el arbol de directorios es igual que en Windows._
 5. Ejecutar las migraciones de base de datos con `sail artisan migrate`.
 6. Instalar Passport con `sail artisan passport:install`. Esto genera las claves de cliente de Passport para autenticación.
 7. Generar el archivo `.env` y agregar los datos de usuario de GIPHY, con las constantes `GIPHY_URL` y `GIPHY_APIKEY`. Ver el archivo `.env.example`.
@@ -37,3 +35,8 @@ Puedes acceder e importar un archivo JSON de Postman con la lista de endpoints y
 ![Secuencia](/_docs/DiagramaSecuencia.png "Secuencia")<br>
 **Diagrama de Entidad Relación**<br>
 ![Entidad Relación](/_docs/DiagramaEntidadRelacion.png "Entidad Relación")
+
+## Acerca de
+
+Juan M. Mulki A.
+ing.mulkiaguilera [at] gmail.com
