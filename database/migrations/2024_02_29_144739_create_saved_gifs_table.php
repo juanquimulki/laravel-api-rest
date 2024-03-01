@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('gif_id');
             $table->string('alias');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

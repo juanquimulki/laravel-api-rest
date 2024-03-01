@@ -91,7 +91,6 @@ class ApiTest extends TestCase
 
         $body = json_decode($response->getContent());
 
-        var_dump($body);
         $this->assertTrue(isset($body->id));
         $response->assertStatus(StatusCodes::$CREATED);
     }

@@ -38,5 +38,5 @@ Puedes acceder e importar un archivo JSON de Postman con la lista de endpoints y
 
 ## Acerca de
 
-Juan M. Mulki A.
+Juan M. Mulki A.<br>
 ing.mulkiaguilera [at] gmail.com

@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('service_requests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('service');
             $table->text('body');
             $table->integer('http_status_code');
             $table->text('response');
             $table->ipAddress('origin');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
