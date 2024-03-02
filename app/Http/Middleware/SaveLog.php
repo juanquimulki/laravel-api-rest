@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Models\User;
 use App\Events\ServiceRequested;
-use App\DataTransferObjects\ServiceRequestData;
+use App\DTO\Requests\ServiceRequestData;
 
 class SaveLog
 {

@@ -10,7 +10,7 @@ use Laravel\Passport\HasApiTokens;
 use Laravel\Passport\Token;
 use App\Classes\StatusCodes;
 use Illuminate\Support\Facades\Hash;
-use App\DataTransferObjects\LoginData;
+use App\DTO\Responses\LoginData;
 
 class User extends Authenticatable
 {
@@ -47,7 +47,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function login(string $password): LoginData
+    public function getTokenIfPasswordOk(string $password): LoginData
     {
         if (Hash::check($password, $this->password)) {
             $token      = $this->createToken('My Token')->accessToken;

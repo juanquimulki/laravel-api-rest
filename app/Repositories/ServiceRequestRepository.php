@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DataTransferObjects\ServiceRequestData;
+use App\DTO\Requests\ServiceRequestData;
 use App\Models\ServiceRequest;
 
 class ServiceRequestRepository {

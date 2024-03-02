@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\GiphyData;
+use App\DTO\Responses\GiphySingleData;
+use App\DTO\Requests\GiphyListData as GiphyListRequest;
+use App\DTO\Responses\GiphyListData as GiphyListResponse;
 
 interface IGiphyService
 {
-    public function getById(string $id): object;
-    public function getByQuery(GiphyData $data): object;
+    public function getById(string $id): GiphySingleData;
+    public function getByQuery(GiphyListRequest $data): GiphyListResponse;
 }

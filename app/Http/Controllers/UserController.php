@@ -24,7 +24,7 @@ class UserController extends Controller
         ]);
 
         $user = $this->userService->getByEmail($request->email);
-        $loginData = $user->login($request->password);
+        $loginData = $user->getTokenIfPasswordOk($request->password);
 
         return response()->json(["token" => $loginData->token], $loginData->statusCode);
     }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Services\IUserService;
 use App\Services\ISavedGifService;
-use App\DataTransferObjects\SavedGifData;
+use App\DTO\Requests\SavedGifData;
 use App\Classes\StatusCodes;
 
 class SavedGifController extends Controller

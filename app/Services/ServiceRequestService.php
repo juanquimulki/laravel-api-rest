@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\ServiceRequestData;
+use App\DTO\Requests\ServiceRequestData;
 use App\Repositories\ServiceRequestRepository;
 
 class ServiceRequestService implements IServiceRequestService {

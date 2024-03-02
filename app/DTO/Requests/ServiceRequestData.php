@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\DTO\Requests;
 
 class ServiceRequestData {
 

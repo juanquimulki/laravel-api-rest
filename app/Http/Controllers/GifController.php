@@ -5,11 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Services\IGiphyService;
-use App\DataTransferObjects\GiphyData;
-use App\DataTransferObjects\GifSingleData;
-use App\DataTransferObjects\GifListData;
-use App\DataTransferObjects\MetaData;
-use App\DataTransferObjects\PaginationData;
+use App\DTO\Requests\GiphyListData;
 
 class GifController extends Controller
 {
@@ -28,10 +24,7 @@ class GifController extends Controller
 
         $response = $this->giphyService->getById($request->id);
 
-        return response()->json([
-            "data"       => (new GifSingleData($response->data))->toArray(),
-            "meta"       => (new MetaData($response->meta))->toArray(),
-        ]);
+        return response()->json($response->toArray());
     }
 
     public function getByQuery(Request $request): JsonResponse
@@ -42,13 +35,9 @@ class GifController extends Controller
             'offset' => 'integer'
         ]);
 
-        $giphyData = new GiphyData($request->q, $request->limit, $request->offset);
+        $giphyData = new GiphyListData($request->q, $request->limit, $request->offset);
         $response = $this->giphyService->getByQuery($giphyData);
 
-        return response()->json([
-            "data"       => (new GifListData($response->data))->toArray(),
-            "meta"       => (new MetaData($response->meta))->toArray(),
-            "pagination" => (new PaginationData($response->pagination))->toArray(),
-        ]);
+        return response()->json($response->toArray());
     }
 }

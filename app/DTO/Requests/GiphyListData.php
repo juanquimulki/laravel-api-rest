@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\DTO\Requests;
 
-class GiphyData {
+class GiphyListData {
 
     public string $query;
     public ?int   $limit;

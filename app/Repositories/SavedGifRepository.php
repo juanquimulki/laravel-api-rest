@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DataTransferObjects\SavedGifData;
+use App\DTO\Requests\SavedGifData;
 use App\Models\SavedGif;
 
 class SavedGifRepository {
