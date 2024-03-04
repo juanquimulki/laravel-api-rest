@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Services\_IGiphyService as IGiphyService;
 use App\DTO\Requests\GiphyListData;
+use App\Classes\StatusCodes;
 
 class GifController extends Controller
 {
@@ -22,9 +23,14 @@ class GifController extends Controller
             'id' => 'required|string', // El 'id' es alfanumérico
         ]);
 
-        $response = $this->giphyService->getById($request->id);
-
-        return response()->json($response->toArray());
+        try {
+            $response = $this->giphyService->getById($request->id);
+            
+            return response()->json($response->toArray());
+        } catch (\Exception $e) {
+            return response()->json(["message"=>$e->getMessage()], StatusCodes::$SERVER_ERROR);
+        }
+        
     }
 
     public function getByQuery(Request $request): JsonResponse
@@ -36,8 +42,11 @@ class GifController extends Controller
         ]);
 
         $giphyData = new GiphyListData($request->q, $request->limit, $request->offset);
-        $response = $this->giphyService->getByQuery($giphyData);
-
-        return response()->json($response->toArray());
+        try {
+            $response = $this->giphyService->getByQuery($giphyData);
+            return response()->json($response->toArray());
+        } catch (\Exception $e) {
+            return response()->json(["message"=>$e->getMessage()], StatusCodes::$SERVER_ERROR);
+        }
     }
 }

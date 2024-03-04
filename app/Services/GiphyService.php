@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 use App\Services\_IGiphyService as IGiphyService; 
 
@@ -29,8 +30,13 @@ class GiphyService implements IGiphyService {
         $params = [];
         $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
 
-        $response = $this->httpClient->request('GET', $id, $params);
-        $body     = json_decode($response->getBody());
+        try {
+            $response = $this->httpClient->request('GET', $id, $params);
+        } catch (ClientException $e) {
+            throw new \Exception('HTTP Client error');
+        }
+        
+        $body = json_decode($response->getBody());
 
         $gif  = new GifSingleData($body->data);
         $meta = new MetaData($body->meta);
@@ -52,7 +58,12 @@ class GiphyService implements IGiphyService {
         ];
         $params = array_merge_recursive($params, $this->httpClient->getConfig('defaults'));
 
-        $response = $this->httpClient->request('GET', 'search', $params);
+        try {
+            $response = $this->httpClient->request('GET', 'search', $params);
+        } catch (ClientException $e) {
+            throw new \Exception('HTTP Client error');
+        }
+
         $body     = json_decode($response->getBody());
 
         $gif        = new GifListData($body->data);
