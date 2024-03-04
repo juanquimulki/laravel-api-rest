@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Services\IGiphyService;
+use App\Services\_IGiphyService as IGiphyService;
 use App\DTO\Requests\GiphyListData;
 
 class GifController extends Controller

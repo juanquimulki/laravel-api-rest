@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Services\IUserService;
-use App\Services\ISavedGifService;
+use App\Services\_IUserService as IUserService;
+use App\Services\_ISavedGifService as ISavedGifService;
 use App\DTO\Requests\SavedGifData;
 use App\Classes\StatusCodes;
 

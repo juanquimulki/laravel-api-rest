@@ -4,6 +4,8 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 
+use App\Services\_IGiphyService as IGiphyService; 
+
 use App\DTO\Requests\GiphyListData as GiphyListRequest;
 use App\DTO\Responses\GiphyListData as GiphyListResponse;
 

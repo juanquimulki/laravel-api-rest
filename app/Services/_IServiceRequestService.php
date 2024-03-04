@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\DTO\Requests\ServiceRequestData;
 
-interface IServiceRequestService
+interface _IServiceRequestService
 {
     public function save(ServiceRequestData $data): void;
 }

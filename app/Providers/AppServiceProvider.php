@@ -4,13 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
-use App\Services\IUserService;
+use App\Services\_IUserService as IUserService;
 use App\Services\UserService;
-use App\Services\IGiphyService;
+use App\Services\_IGiphyService as IGiphyService;
 use App\Services\GiphyService;
-use App\Services\ISavedGifService;
+use App\Services\_ISavedGifService as ISavedGifService;
 use App\Services\SavedGifService;
-use App\Services\IServiceRequestService;
+use App\Services\_IServiceRequestService as IServiceRequestService;
 use App\Services\ServiceRequestService;
 
 class AppServiceProvider extends ServiceProvider

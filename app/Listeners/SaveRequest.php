@@ -6,7 +6,7 @@ use App\Events\ServiceRequested;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-use App\Services\IServiceRequestService;
+use App\Services\_IServiceRequestService as IServiceRequestService;
 
 class SaveRequest
 {

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Services\_ISavedGifService as ISavedGifService; 
 use App\DTO\Requests\SavedGifData;
 use App\Repositories\SavedGifRepository;
 use App\Models\SavedGif;

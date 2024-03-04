@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Services\_IUserService as IUserService;
 use App\Repositories\UserRepository;
 use App\Models\User;
 

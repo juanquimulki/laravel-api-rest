@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Services\IUserService;
+use App\Services\_IUserService as IUserService;
 
 class UserController extends Controller
 {
